@@ -46,27 +46,3 @@ func ServerConfigToClientOutboundDetourConfig(serverName, publicKey string, serv
 
 	return nil, fmt.Errorf("no eligible inbound config in server config")
 }
-
-func getServerConfigBase() xrayconfig.Config {
-	return xrayconfig.Config{
-		LogConfig: &xrayconfig.LogConfig{
-			AccessLog: "/var/log/v2ray/access.log",
-			ErrorLog:  "/var/log/v2ray/v2ray.log",
-			LogLevel:  "info",
-		},
-		API: &xrayconfig.APIConfig{
-			Tag: "api",
-			Services: []string{
-				"HandlerService",
-				"LoggerService",
-				"StatsService",
-			},
-		},
-		InboundConfigs: []xrayconfig.InboundDetourConfig{},
-		OutboundConfigs: []xrayconfig.OutboundDetourConfig{
-			{
-				Protocol: "freedom",
-			},
-		},
-	}
-}
